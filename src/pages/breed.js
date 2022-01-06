@@ -5,7 +5,8 @@ import BreedDetail from "../components/breed-detail";
 
 export const GET_BREED = gql`
   query getBreed($breedName: String!) {
-    getBreedsByName (breedName: $breedName){
+    getBreedsByName(breedName: $breedName) {
+      id
       description
       name
       temperament
@@ -19,7 +20,9 @@ export const GET_BREED = gql`
       adaptability
       life_span
       origin
-      id
+      breedImage {
+        url
+      }
     }
   }
 `;
@@ -31,7 +34,9 @@ const Breed = ({ breedName }) => {
   return (
     <Layout>
       <QueryResult error={error} loading={loading} data={data}>
-        <BreedDetail breed={data?.breed} />
+      {data?.getBreedsByName?.map((breed) => (
+           <BreedDetail key={breed.id} breed={breed} />
+        ))}
       </QueryResult>
     </Layout>
   );

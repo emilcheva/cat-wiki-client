@@ -1,8 +1,12 @@
-import React from 'react';
+import React from "react";
+import FlexContainer from "../containers/flex";
+import Layout  from "../containers/layout";
+import Score from "./score";
 
 /**
- * Breed Detail component renders the main content of a given breed
+ * Breed Detail component renders the main content of a given breed and an image
  */
+
 const BreedDetail = ({ breed }) => {
   const {
     description,
@@ -18,15 +22,83 @@ const BreedDetail = ({ breed }) => {
     adaptability,
     life_span,
     origin,
-    id
+    breedImage,
   } = breed;
 
   return (
-    <ul>
-      <li>
-       <p>{description ? description : 'sorry'}</p>
-      </li>
-    </ul>
+      <>
+      <section className="">
+        <div className="">
+          <img width="200" height="200"
+            src={breedImage[0].url}
+            alt={name}
+          />
+        </div>
+        <div className="">
+          <h2>{name}</h2>
+          <p>{description}</p>
+          <FlexContainer>
+            <span className="font-bold">Temperament : </span>
+            <span>{temperament}</span>
+          </FlexContainer>
+          <FlexContainer>
+            <span className="font-bold">Origin : </span>
+            <span>{origin}</span>
+          </FlexContainer>
+          <FlexContainer>
+            <span className="font-bold">Life Span : </span>
+            <span>{life_span} years</span>
+          </FlexContainer>
+          <div className="flex flex-wrap items-center">
+            <span className="font-bold w-52">Adaptability : </span>
+            <Score count={adaptability} />
+          </div>
+          <div className="flex flex-wrap items-center">
+            <span className="font-bold w-52">Affection Level : </span>
+            <Score count={affection_level} />
+          </div>
+          <div className="flex flex-wrap items-center">
+            <span className="font-bold w-52">Child Friendly : </span>
+            <Score count={child_friendly} />
+          </div>
+          <div className="flex flex-wrap items-center">
+            <span className="font-bold w-52">Grooming : </span>
+            <Score count={grooming} />
+          </div>
+          <div className="flex flex-wrap items-center">
+            <span className="font-bold w-52">Intelligence : </span>
+            <Score count={intelligence} />
+          </div>
+          <div className="flex flex-wrap items-center">
+            <span className="font-bold w-52">Health issues : </span>
+            <Score count={health_issues} />
+          </div>
+          <div className="flex flex-wrap items-center">
+            <span className="font-bold w-52">Social Needs : </span>
+            <Score count={social_needs} />
+          </div>
+          <div className="flex flex-wrap items-center">
+            <span className="font-bold w-52">Stranger friendly : </span>
+            <Score count={stranger_friendly} />
+          </div>
+        </div>
+      </section>
+      <section className="my-8">
+        <h2 className="text-4xl font-semibold mb-8">Other photos</h2>
+        <div className="flex flex-wrap space-x-8 space-y-9 ">
+          {breedImage.map((image, index) => (
+            <div className="relative self-end" key={index}>
+              <img
+                width='275'
+                height='275'
+                src={image.url}
+                alt={name}
+              />
+            </div>
+          ))}
+        </div>
+      </section>
+      </>
   );
 };
 

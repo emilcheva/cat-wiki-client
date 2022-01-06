@@ -1,6 +1,7 @@
-import React from 'react';
-import '@apollo/space-kit/reset.css';
-import { Global } from '@emotion/core';
+import React from "react";
+import "@apollo/space-kit/reset.css";
+import { Global } from "@emotion/core";
+import { isNonEmptyArray } from "@apollo/client/utilities";
 
 const breakpoints = [480, 768, 992, 1200];
 export const mq = breakpoints.map((bp) => `@media (min-width: ${bp}px)`);
@@ -12,19 +13,19 @@ export const widths = {
   textPageWidth: 800,
 };
 export const colors = {
-  light: '#fff',
-  dark: '#000',
-  accent: '#4D270C',
-  grey: '#E3E1DC',
-  text: '#291507',
-  darkGrey: '#544439'
+  light: "#fff",
+  dark: "#000",
+  accent: "#4D270C",
+  grey: "#E3E1DC",
+  text: "#291507",
+  darkGrey: "#544439",
 };
 
 const GlobalStyles = () => (
   <Global
     styles={{
-      [['html', 'body']]: {
-        height: '100%',
+      [["html", "body"]]: {
+        height: "100%",
       },
       body: {
         margin: 0,
@@ -33,15 +34,18 @@ const GlobalStyles = () => (
         backgroundColor: colors.light,
         color: colors.text,
       },
-      '#root': {
-        display: 'flex',
-        flexDirection: 'column',
-        minHeight: '100%'
+      [["ol", "ul]"]]: {
+        listStyleType: "none",
       },
-      '*': {
-        boxSizing: 'border-box',
+      "#root": {
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100%",
       },
-      [['h1', 'h2', 'h3', 'h4', 'h5', 'h6']]: {
+      "*": {
+        boxSizing: "border-box",
+      },
+      [["h1", "h2", "h3", "h4", "h5", "h6"]]: {
         margin: 0,
         fontWeight: 600,
       },
@@ -57,7 +61,7 @@ const GlobalStyles = () => (
       },
       h5: {
         fontSize: 16,
-        textTransform: 'uppercase',
+        textTransform: "uppercase",
         letterSpacing: 4,
       },
     }}
