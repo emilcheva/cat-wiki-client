@@ -1,7 +1,7 @@
 import React from "react";
 import FlexContainer from "../containers/flex";
-import Layout  from "../containers/layout";
 import Score from "./score";
+import ImageWrapper from "./image-wrapper";
 
 /**
  * Breed Detail component renders the main content of a given breed and an image
@@ -29,7 +29,7 @@ const BreedDetail = ({ breed }) => {
       <>
       <section className="">
         <div className="">
-          <img width="200" height="200"
+          <ImageWrapper width="370" height="370"
             src={breedImage[0].url}
             alt={name}
           />
@@ -85,18 +85,16 @@ const BreedDetail = ({ breed }) => {
       </section>
       <section className="my-8">
         <h2 className="text-4xl font-semibold mb-8">Other photos</h2>
-        <div className="flex flex-wrap space-x-8 space-y-9 ">
-          {breedImage.map((image, index) => (
-            <div className="relative self-end" key={index}>
-              <img
+        <FlexContainer>
+          {breedImage.map((image) => (
+              <ImageWrapper
                 width='275'
                 height='275'
                 src={image.url}
                 alt={name}
               />
-            </div>
           ))}
-        </div>
+        </FlexContainer>
       </section>
       </>
   );

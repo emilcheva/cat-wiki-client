@@ -5,6 +5,7 @@ import HeroBanner from "../components/hero-banner";
 import { colors } from "../styles";
 import { Link } from "@reach/router";
 import styled from "@emotion/styled";
+import ImageWrapper from "../components/image-wrapper";
 
 export const GET_BREEDS = gql`
   query getBreeds {
@@ -26,14 +27,14 @@ const Home = () => {
       <QueryResult error={error} loading={loading} data={data}>
         {data?.getBreeds?.map((breed) => (
           <div key={breed.id}>
-            <img src={breed.breedImage[0].url} width="200" height="200" />
+            <ImageWrapper src={breed.breedImage[0].url} width="200" height="200" alt={breed.name} />
             <StyledLink to={`/breed/${breed.name}`}>{breed.name}</StyledLink>
           </div>
         ))}
       </QueryResult>
       <p>Most Searched Breeds</p>
       <h2>66+ Breeds For You to Discover</h2>
-      <a href="/top-breeds">See More</a>
+      <Link to="/top-breeds">See More</Link>
     </Layout>
   );
 };
