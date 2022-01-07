@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-const ImageWrapper = ({ src, width, height, alt }) => {
+const ImageWrapper = ({ src, width, height, alt, className }) => {
   return (
-      <Image src={src} width={width} height={height} alt={alt} />
+      <Image className={className} src={src} width={width} height={height} alt={alt} />
   );
 };
 

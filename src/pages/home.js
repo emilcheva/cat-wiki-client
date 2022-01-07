@@ -35,7 +35,7 @@ const Home = () => {
           <Row>
             <p>Most Searched Breeds</p>
             <FlexContainer justifyContent='space-between' alignItems='flex-end' className='my-4'>
-              <h2>66+ Breeds For You to Discover</h2>
+              <h2 className="mb-0">66+ Breeds For You to Discover</h2>
               <LinkArrow to="/top-breeds">See More</LinkArrow>
             </FlexContainer>
           </Row>
