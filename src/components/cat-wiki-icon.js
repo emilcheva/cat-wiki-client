@@ -1,23 +1,19 @@
-import React from 'react';
-import styled from '@emotion/styled';
-import logo from '../assets/CatwikiLogo.svg'
+import React from "react";
+import styled from "@emotion/styled";
+import { ReactComponent as CatLogoSVG } from "../assets/CatwikiLogo.svg";
 
-const CatWikiIcon = ({ props }) => {
+const CatWikiIcon = (props) => {
   return (
-      <LogoContainer>
-        <Icon src={logo} {...props}/>
-      </LogoContainer>
+    <LogoContainer height={props.height} width={props.width}>
+      <CatLogoSVG fill={props.color} />
+    </LogoContainer>
   );
 };
 
 export default CatWikiIcon;
 
-const LogoContainer = styled.div({
-  marginLeft: 5
-});
-
-const Icon = styled.img(props => ({
-    height: props.height || "40px",
-    width: props.width,
-    color: props.color
-}))
+const LogoContainer = styled.div((props) => ({
+  marginLeft: 5,
+  height: props.height || "auto",
+  width: props.width || "100px",
+}));

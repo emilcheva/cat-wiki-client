@@ -12,9 +12,9 @@ const FlexContainer = ({ children, direction }) => {
 export default FlexContainer;
 
 /** Flex styled components */
-const Flex = styled.div(direction => ({
+const Flex = styled.div(props => ({
     display: 'flex',
-    flexDirection: direction && direction === 'vertical' ? 'column' : 'row',
+    flexDirection: props?.direction === 'vertical' ? 'column' : 'row',
     flexWrap: 'wrap',
     alignSelf: 'center',
 }));

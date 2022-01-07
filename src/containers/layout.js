@@ -1,7 +1,7 @@
 import React from 'react';
 import { Header, Footer } from '../components';
 import styled from '@emotion/styled';
-import { widths, unit } from '../styles';
+import { Container } from 'react-bootstrap';
 
 /**
  * Layout renders the full page content:
@@ -11,26 +11,12 @@ const Layout = ({ fullWidth, children, grid }) => {
   return (
     <>
       <Header />
-      <PageContainer fullWidth={fullWidth} grid={grid}>
+      <Container>
         {children}
-      </PageContainer>
+      </Container>
       <Footer />
     </>
   );
 };
 
 export default Layout;
-
-/** Layout styled components */
-const PageContainer = styled.div((props) => ({
-  display: 'flex',
-  justifyContent: props.grid ? 'center' : 'top',
-  flexDirection: props.grid ? 'row' : 'column',
-  flexWrap: 'wrap',
-  alignSelf: 'center',
-  flexGrow: 1,
-  maxWidth: props.fullWidth ? null : `${widths.regularPageWidth}px`,
-  width: '100%',
-  padding: unit * 5,
-  paddingBottom: 0,
-}));

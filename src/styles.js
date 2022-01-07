@@ -1,17 +1,8 @@
 import React from "react";
 import "@apollo/space-kit/reset.css";
 import { Global } from "@emotion/core";
-import { isNonEmptyArray } from "@apollo/client/utilities";
 
-const breakpoints = [480, 768, 992, 1200];
-export const mq = breakpoints.map((bp) => `@media (min-width: ${bp}px)`);
 
-export const unit = 8;
-export const widths = {
-  largePageWidth: 1600,
-  regularPageWidth: 1100,
-  textPageWidth: 800,
-};
 export const colors = {
   light: "#fff",
   dark: "#000",
@@ -26,6 +17,10 @@ const GlobalStyles = () => (
     styles={{
       [["html", "body"]]: {
         height: "100%",
+      },
+      svg: {
+          overflow: 'hidden',
+          height: '100%'
       },
       body: {
         margin: 0,
