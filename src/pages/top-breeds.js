@@ -2,6 +2,7 @@ import React from "react";
 import { gql, useQuery } from "@apollo/client";
 import { Layout, QueryResult } from "../components";
 import BreedShortDetail from "../components/breed-short-detail";
+import styled from "@emotion/styled";
 
 export const GET_TOP_BREEDS = gql`
   query getBreeds($limit: Int) {
@@ -33,20 +34,24 @@ const TopBreeds = () => {
   });
   return (
     <Layout>
-      <>
+      <TopBreedsContainer>
       <h2>Top 10 most searched breeds</h2>
       <QueryResult error={error} loading={loading} data={data}>
-        <ol>
+        <ul className="mt-5">
           {data?.getBreeds?.map((breed) => (
             <li key={breed.id}>
-              <BreedShortDetail key={breed.id} breed={breed} />
+              <BreedShortDetail breed={breed} />
             </li>
           ))}
-        </ol>
+        </ul>
       </QueryResult>
-      </>
+      </TopBreedsContainer>
     </Layout>
   );
 };
 
 export default TopBreeds;
+
+const TopBreedsContainer = styled.div({
+  counterReset: "my-counter"
+});

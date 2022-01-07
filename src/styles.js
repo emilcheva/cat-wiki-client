@@ -2,7 +2,6 @@ import React from "react";
 import "@apollo/space-kit/reset.css";
 import { Global } from "@emotion/core";
 
-
 export const colors = {
   light: "#fff",
   dark: "#000",
@@ -22,6 +21,10 @@ const GlobalStyles = () => (
           overflow: 'hidden',
           height: '100%'
       },
+      a: {
+          textDecoration: 'none',
+          color: 'inherit'
+      },
       body: {
         margin: 0,
         padding: 0,
@@ -29,8 +32,9 @@ const GlobalStyles = () => (
         backgroundColor: colors.light,
         color: colors.text,
       },
-      [["ol", "ul]"]]: {
+      [["ol", "ul"]]: {
         listStyleType: "none",
+        padding: 0
       },
       "#root": {
         display: "flex",
@@ -42,23 +46,9 @@ const GlobalStyles = () => (
       },
       [["h1", "h2", "h3", "h4", "h5", "h6"]]: {
         margin: 0,
-        fontWeight: 600,
+        fontWeight: 700,
       },
-      h1: {
-        fontSize: 40,
-        lineHeight: 1,
-      },
-      h2: {
-        fontSize: 36,
-      },
-      h3: {
-        fontSize: 30,
-      },
-      h5: {
-        fontSize: 16,
-        textTransform: "uppercase",
-        letterSpacing: 4,
-      },
+    
     }}
   />
 );

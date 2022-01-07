@@ -11,6 +11,7 @@ import { Row, Container, Col } from "react-bootstrap";
 import cat1 from "../assets/image 1.png";
 import cat2 from "../assets/image 2.png";
 import cat3 from "../assets/image 3.png";
+import LinkArrow from "../components/link-arrow";
 
 export const GET_BREEDS = gql`
   query getBreeds {
@@ -33,8 +34,10 @@ const Home = () => {
         <Container>
           <Row>
             <p>Most Searched Breeds</p>
-            <h2>66+ Breeds For You to Discover</h2>
-            <Link to="/top-breeds">See More</Link>
+            <FlexContainer justifyContent='space-between' alignItems='flex-end' className='my-4'>
+              <h2>66+ Breeds For You to Discover</h2>
+              <LinkArrow to="/top-breeds">See More</LinkArrow>
+            </FlexContainer>
           </Row>
           <Row>
             <QueryResult error={error} loading={loading} data={data}>
@@ -65,17 +68,23 @@ const Home = () => {
                 calming chemicals in your body which lower your stress and
                 anxiety leves
               </p>
+              <LinkArrow isInternalLink='false' to='https://animalkind.org/blog/top-5-reasons-cat/'>Read More</LinkArrow>
             </Col>
             <Col md="8">
               <Row xs="auto">
                 <Col>
                   <FlexContainer direction="vertical" alignItems="flex-end">
-                    <img src={cat2} width='270' alt="hugging cat"></img>
-                    <img className="mt-4" src={cat1} width='195' alt="cat paw"></img>
+                    <img src={cat2} width="270" alt="hugging cat"></img>
+                    <img
+                      className="mt-4"
+                      src={cat1}
+                      width="195"
+                      alt="cat paw"
+                    ></img>
                   </FlexContainer>
                 </Col>
                 <Col>
-                  <img src={cat3} width='238' alt="cat in bag"></img>
+                  <img src={cat3} width="238" alt="cat in bag"></img>
                 </Col>
               </Row>
             </Col>
@@ -89,6 +98,8 @@ const Home = () => {
 export default Home;
 
 const StyledLink = styled(Link)({
+  display: "block",
+  textAlign: "left",
   color: colors.accent,
   cursor: "pointer",
 });

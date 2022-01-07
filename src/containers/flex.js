@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-const FlexContainer = ({ children, direction, justifyContent, alignItems }) => {
+const FlexContainer = ({ children, className, direction, justifyContent, alignItems }) => {
   return (
-      <Flex direction={direction} justifyContent={justifyContent} alignItems={alignItems}>
+      <Flex className={className} direction={direction} justifyContent={justifyContent} alignItems={alignItems}>
         { children }
       </Flex>
   );
