@@ -1,8 +1,8 @@
 {
-  "name": "react-graphql-apollo-client",
+  "name": "cat-wiki-client",
   "version": "1.0.0",
   "private": true,
-  "description": "front-end demo app for Apollo's lift-off course",
+  "description": "React based app for Cat Wiki challenge",
   "dependencies": {
     "@apollo/client": "^3.5.5",
     "@apollo/space-kit": "^9.3.1",
