@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const client = new ApolloClient({
   // options go here
-  uri: 'http://localhost:4000',
+  uri: 'https://cat-wiki-apollo-server.herokuapp.com',
   cache: new InMemoryCache()
 });
 
