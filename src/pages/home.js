@@ -58,7 +58,7 @@ const Home = () => {
       <WhyCatSection>
         <Container>
           <Row>
-            <Col>
+            <Col md="4">
               <h2>Why should you have a cat?</h2>
               <p>
                 Having a cat around you can actually trigger the release of
@@ -66,12 +66,12 @@ const Home = () => {
                 anxiety leves
               </p>
             </Col>
-            <Col>
-              <Row>
+            <Col md="8">
+              <Row xs="auto">
                 <Col>
-                  <FlexContainer vertical>
+                  <FlexContainer direction="vertical" alignItems="flex-end">
                     <img src={cat2} width='270' alt="hugging cat"></img>
-                    <img src={cat1} width='195' alt="cat paw"></img>
+                    <img className="mt-4" src={cat1} width='195' alt="cat paw"></img>
                   </FlexContainer>
                 </Col>
                 <Col>

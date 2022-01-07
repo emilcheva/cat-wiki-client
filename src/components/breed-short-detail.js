@@ -2,7 +2,7 @@ import React from "react";
 import ImageWrapper from "./image-wrapper";
 
 /**
- * Breed Detail component renders the main content of a given breed and an image
+ * Breed Short Detail component renders the name and an image of a given breed 
  */
 
 const BreedShortDetail = ({ breed }) => {

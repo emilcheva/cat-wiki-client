@@ -9,10 +9,10 @@ const Footer = () => {
   return (
     <Container>
       <FooterContainer>
-        <FlexContainer>
+        <FlexContainer justifyContent="space-between" alignItems="center">
           <CatWikiIcon width="100px" color={colors.light} />
-          <p className="small">
-            © created by <a href="https://github.com/emilcheva">emilcheva</a> -
+          <p className="small m-0">
+            © created by <a className="text-white" href="https://github.com/emilcheva">emilcheva</a> -
             devChallenge.io 2022{" "}
           </p>
         </FlexContainer>
@@ -27,7 +27,7 @@ export default Footer;
 const FooterContainer = styled.div({
   color: colors.light,
   marginTop: 30,
-  padding: 20,
+  padding: '20px 100px',
   backgroundColor: colors.dark,
   borderRadius: "50px 50px 0 0",
 });
