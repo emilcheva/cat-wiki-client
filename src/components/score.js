@@ -19,7 +19,7 @@ const Score = ({ count }) => {
 export default Score;
 
 const ScoreItem = styled.span(props => ({
-  marginRight: "5px",
+  margin: "5px 5px 5px 0",
   width: "60px",
   height: "12px",
   borderRadius: "8px",

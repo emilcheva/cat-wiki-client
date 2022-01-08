@@ -3,6 +3,7 @@ import FlexContainer from "../containers/flex";
 import Score from "./score";
 import ImageWrapper from "./image-wrapper";
 import { Row, Col } from "react-bootstrap";
+import BreedDetailItem from "./breed-detail-item";
 
 /**
  * Breed Detail component renders the main content of a given breed and an image
@@ -30,7 +31,7 @@ const BreedDetail = ({ breed }) => {
     <>
       <section>
         <Row>
-          <Col xs="auto">
+          <Col xs="auto" className="mb-4">
             <ImageWrapper
               className="me-md-5"
               width="400"
@@ -38,69 +39,56 @@ const BreedDetail = ({ breed }) => {
               alt={name}
             />
           </Col>
-          <Col>
+          <Col lg='6'>
             <h2>{name}</h2>
             <p>{description}</p>
             <Row>
-              <Col md="8">
-                <FlexContainer className="mt-4" justifyContent="space-between">
-                  <span className="fw-bolder">Temperament : </span>
+              <Col>
+                <BreedDetailItem text="Temperament">
                   <span className="d-inline-block">{temperament}</span>
-                </FlexContainer>
-                <FlexContainer className="mt-3" justifyContent="space-between">
-                  <span className="fw-bolder">Origin: </span>
-                  <span>{origin}</span>
-                </FlexContainer>
-                <FlexContainer className="mt-3" justifyContent="space-between">
-                  <span className="fw-bolder">Life Span : </span>
+                </BreedDetailItem>
+                <BreedDetailItem text="Origin">
+                  <span className="d-inline-block">{origin}</span>
+                </BreedDetailItem>
+                <BreedDetailItem text="Life Span">
                   <span>{life_span} years</span>
-                </FlexContainer>
-                <FlexContainer className="mt-3" justifyContent="space-between">
-                  <span className="me-5 fw-bolder">Adaptability : </span>
+                </BreedDetailItem>
+                <BreedDetailItem text="Adaptability">
                   <Score count={adaptability} />
-                </FlexContainer>
-                <FlexContainer className="mt-3" justifyContent="space-between">
-                  <span className="fw-bolder">Affection Level : </span>
+                </BreedDetailItem>
+                <BreedDetailItem text="Affection Level">
                   <Score count={affection_level} />
-                </FlexContainer>
-                <FlexContainer className="mt-3" justifyContent="space-between">
-                  <span className="fw-bolder">Child Friendly : </span>
+                </BreedDetailItem>
+                <BreedDetailItem text="Child Friendly">
                   <Score count={child_friendly} />
-                </FlexContainer>
-                <FlexContainer className="mt-3" justifyContent="space-between">
-                  <span className="fw-bolder">Grooming : </span>
+                </BreedDetailItem>
+                <BreedDetailItem text="Grooming">
                   <Score count={grooming} />
-                </FlexContainer>
-                <FlexContainer className="mt-3" justifyContent="space-between">
-                  <span className="fw-bolder">Intelligence : </span>
+                </BreedDetailItem>
+                <BreedDetailItem text="Intelligence">
                   <Score count={intelligence} />
-                </FlexContainer>
-                <FlexContainer className="mt-3" justifyContent="space-between">
-                  <span className="fw-bolder">Health issues : </span>
+                </BreedDetailItem>
+                <BreedDetailItem text="Health issues">
                   <Score count={health_issues} />
-                </FlexContainer>
-                <FlexContainer className="mt-3" justifyContent="space-between">
-                  <span className="fw-bolder">Social Needs : </span>
+                </BreedDetailItem>
+                <BreedDetailItem text="Social Needs">
                   <Score count={social_needs} />
-                </FlexContainer>
-                <FlexContainer className="mt-3" justifyContent="space-between">
-                  <span className="fw-bolder">Stranger friendly : </span>
+                </BreedDetailItem>
+                <BreedDetailItem text="Stranger friendly">
                   <Score count={stranger_friendly} />
-                </FlexContainer>
+                </BreedDetailItem>
               </Col>
             </Row>
           </Col>
         </Row>
       </section>
-      <section className="my-8">
+      <section className="my-5">
         <h2>Other photos</h2>
         <Row>
           {breedImage.map((image) => (
-            <Col>
+            <Col sm='12' md='6' lg='3' className='mb-4'>
               <ImageWrapper
                 key={image.id}
-                width="275"
-                height="275"
                 src={image.url}
                 alt={name}
               />

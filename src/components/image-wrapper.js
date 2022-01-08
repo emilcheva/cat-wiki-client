@@ -12,5 +12,6 @@ export default ImageWrapper;
 const Image = styled.img({
     objectFit: 'cover',
     borderRadius: '24px',
-    marginBottom: '20px'
+    width: '100%',
+    height: '250px',
 })
