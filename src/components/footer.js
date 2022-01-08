@@ -11,7 +11,7 @@ const Footer = () => {
       <FooterContainer>
         <FlexContainer justifyContent="space-between" alignItems="center">
           <CatWikiIcon width="100px" color={colors.light} />
-          <p className="small m-0">
+          <p className="small mb-0 mt-2 mt-sm-0">
             © created by <a className="text-white" href="https://github.com/emilcheva">emilcheva</a> -
             devChallenge.io 2022{" "}
           </p>
@@ -24,10 +24,19 @@ const Footer = () => {
 export default Footer;
 
 /** Footer styled components */
-const FooterContainer = styled.div({
-  color: colors.light,
-  marginTop: 30,
-  padding: '20px 100px',
-  backgroundColor: colors.dark,
-  borderRadius: "50px 50px 0 0",
-});
+const FooterContainer = styled.div`
+  color: ${colors.light};
+  margin-top: 30;
+  background-color: ${colors.dark};
+  border-radius: 50px 50px 0 0;
+  padding: 20px 30px;
+  @media (min-width: 768px) {
+    padding: 20px 50px;
+  }
+  @media (min-width: 1024px) {
+    padding: 20px 80px;
+  }
+  @media (min-width: 1440px) {
+    padding: 20px 100px;
+  }
+`;

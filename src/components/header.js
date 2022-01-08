@@ -13,7 +13,7 @@ const Header = ({ children }) => {
     <HeaderBar>
       <Container>
           <HomeLink to="/">
-               <CatWikiIcon width="100px" color={colors.dark} />
+               <CatWikiIcon color={colors.dark} />
           </HomeLink>
         {children}
       </Container>

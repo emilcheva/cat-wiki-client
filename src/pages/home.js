@@ -1,8 +1,8 @@
 import React from "react";
 import { gql, useQuery } from "@apollo/client";
 import HeroBanner from "../components/hero-banner";
-import Layout from '../containers/layout';
-import QueryResult  from "../components/query-result";
+import Layout from "../containers/layout";
+import QueryResult from "../components/query-result";
 import { colors } from "../styles";
 import { Link } from "@reach/router";
 import styled from "@emotion/styled";
@@ -32,18 +32,18 @@ const Home = () => {
     <Layout>
       <HeroBanner />
       <TopBreedsSection>
-        <Container>
+        <Container className='p-0'>
           <Row>
             <p>Most Searched Breeds</p>
-            <FlexContainer justifyContent='space-between' alignItems='flex-end' >
-              <h2 className='mb-3 mb-md-0'>66+ Breeds For You to Discover</h2>
+            <FlexContainer justifyContent="space-between" alignItems="flex-end">
+              <h2 className="mb-3 mb-md-0">66+ Breeds For You to Discover</h2>
               <LinkArrow to="/top-breeds">See More</LinkArrow>
             </FlexContainer>
           </Row>
           <Row>
             <QueryResult error={error} loading={loading} data={data}>
               {data?.getBreeds?.map((breed) => (
-                <Col key={breed.id} sm='6' lg='3' className='mt-5'>
+                <Col key={breed.id} sm="6" lg="3" className="mt-5">
                   <ImageWrapper
                     src={breed.breedImage[0].url}
                     width="220"
@@ -61,7 +61,7 @@ const Home = () => {
       </TopBreedsSection>
       <WhyCatSection>
         <Container>
-          <Row className='align-items-center'>
+          <Row className="align-items-center">
             <Col lg="6">
               <h2>Why should you have a cat?</h2>
               <p>
@@ -69,11 +69,16 @@ const Home = () => {
                 calming chemicals in your body which lower your stress and
                 anxiety leves
               </p>
-              <LinkArrow isInternalLink='false' to='https://animalkind.org/blog/top-5-reasons-cat/'>Read More</LinkArrow>
+              <LinkArrow
+                isInternalLink="false"
+                to="https://animalkind.org/blog/top-5-reasons-cat/"
+              >
+                Read More
+              </LinkArrow>
             </Col>
-            <Col lg="6" className='mt-5 mt-lg-0'>
+            <Col lg="6" className="mt-5 mt-lg-0">
               <Row>
-                <Col xs='6'>
+                <Col xs="6">
                   <FlexContainer direction="vertical" alignItems="flex-end">
                     <img src={cat2} alt="hugging cat"></img>
                     <img
@@ -83,7 +88,7 @@ const Home = () => {
                     ></img>
                   </FlexContainer>
                 </Col>
-                <Col xs='6'>
+                <Col xs="6">
                   <img src={cat3} alt="cat in bag"></img>
                 </Col>
               </Row>
@@ -102,15 +107,33 @@ const StyledLink = styled(Link)({
   textAlign: "left",
   color: colors.accent,
   cursor: "pointer",
-  marginTop: '20px'
+  marginTop: "20px",
 });
 
-const TopBreedsSection = styled.section({
-  backgroundColor: colors.grey,
-  borderRadius: "0px 0px 50px 50px;",
-  padding: "50px 100px 100px",
-});
+const TopBreedsSection = styled.section`
+  background-color: ${colors.grey};
+  border-radius: 0px 0px 50px 50px;
+  padding: 30px;
+  @media (min-width: 768px) {
+    padding: 50px;
+  }
+  @media (min-width: 1024px) {
+    padding: 50px 80px 80px;
+  }
+  @media (min-width: 1440px) {
+    padding: 50px 100px 100px;
+  }
+`;
 
-const WhyCatSection = styled.section({
-  padding: "100px",
-});
+const WhyCatSection = styled.section`
+  padding: 30px 0;
+  @media (min-width: 768px) {
+    padding: 50px;
+  }
+  @media (min-width: 1024px) {
+    padding: 80px;
+  }
+  @media (min-width: 1440px) {
+    padding: 100px;
+  }
+`;

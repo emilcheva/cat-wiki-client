@@ -9,8 +9,8 @@ const HeroBanner = () => {
   return (
     <HeroContainer>
       <FlexContainer direction="vertical">
-          <CatWikiIcon width="220px" color={colors.light} />
-          <p>Get to know more about your cat breed</p>
+        <CatWikiIcon width="220px" color={colors.light} />
+        <p>Get to know more about your cat breed</p>
       </FlexContainer>
     </HeroContainer>
   );
@@ -18,13 +18,22 @@ const HeroBanner = () => {
 
 export default HeroBanner;
 
-const HeroContainer = styled.div(`
+const HeroContainer = styled.div`
 background-color: ${colors.dark};
    background-image: url('${heroImg}');
    border-radius: 50px 50px 0 0;
    background-size: cover;
    background-repeat: no-repeat;
-   min-height: 400px;
   color: ${colors.light};
-  padding: 100px;
-`);
+  padding: 30px;
+  @media (min-width: 768px) {
+    padding: 50px;
+  }
+  @media (min-width: 1024px) {
+    padding: 80px;
+    min-height: 400px;
+  }
+  @media (min-width: 1440px) {
+    padding: 100px;
+  }
+`;

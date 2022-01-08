@@ -26,7 +26,7 @@ const LinkArrow = ({ children, to, isInternalLink }) => {
         <ArrowRightAlt
           style={{
             fill: colors.text,
-            marginLeft: "5px",
+            margin: "0 0 15px 5px",
             verticalAlign: "middle",
             opacity: 0.6,
           }}
@@ -39,7 +39,10 @@ const LinkArrow = ({ children, to, isInternalLink }) => {
 
 export default LinkArrow;
 
-const LinkText = styled.span({
-  color: colors.text,
-  opacity: "0.6",
-});
+const LinkText = styled.span`
+  color: ${colors.text};
+  opacity: 0.6;
+  &:hover{
+      cursor: pointer;
+  }
+`;

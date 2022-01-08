@@ -51,7 +51,6 @@ const GlobalStyles = () => (
         marginBottom: '2rem',
         fontWeight: 700,
       },
-    
     }}
   />
 );

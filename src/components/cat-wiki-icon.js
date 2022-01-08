@@ -15,5 +15,5 @@ export default CatWikiIcon;
 const LogoContainer = styled.div((props) => ({
   marginLeft: 5,
   height: props.height || "auto",
-  width: props.width || "100px",
+  width: props.width || "150px",
 }));
