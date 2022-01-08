@@ -5,9 +5,10 @@ import { colors } from "../styles";
 import styled from "@emotion/styled";
 
 const LinkArrow = ({ children, to, isInternalLink }) => {
+  const shouldNavigateToExternalPage = isInternalLink && isInternalLink === 'true' ? 'true' : 'false';
   return (
     <>
-      { isInternalLink &&
+      { !shouldNavigateToExternalPage &&
       <Link to={to}>
         <LinkText>{children.toUpperCase()}</LinkText>
         <ArrowRightAlt
@@ -20,13 +21,13 @@ const LinkArrow = ({ children, to, isInternalLink }) => {
           fontSize="medium"
         />
       </Link> }
-      { !isInternalLink &&
+      { shouldNavigateToExternalPage &&
       <a href={to}>
         <LinkText>{children.toUpperCase()}</LinkText>
         <ArrowRightAlt
           style={{
             fill: colors.text,
-            margin: "0 0 15px 5px",
+            margin: "0 0 5px 5px",
             verticalAlign: "middle",
             opacity: 0.6,
           }}
