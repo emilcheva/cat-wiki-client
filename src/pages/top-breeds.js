@@ -1,8 +1,9 @@
 import React from "react";
 import { gql, useQuery } from "@apollo/client";
-import { Layout, QueryResult } from "../components";
 import BreedShortDetail from "../components/breed-short-detail";
 import styled from "@emotion/styled";
+import Layout from '../containers/layout';
+import QueryResult  from "../components/query-result";
 
 export const GET_TOP_BREEDS = gql`
   query getBreeds($limit: Int) {

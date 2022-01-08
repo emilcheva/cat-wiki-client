@@ -13,14 +13,15 @@ const BreedShortDetail = ({ breed }) => {
   return (
     <BreedInfo>
       <Row className="align-items-center">
-        <Col xs='auto'>
+        <Col xs='auto' className='me-md-4 mb-3'>
           <ImageWrapper
-            width="170"
-            height="170"
+            className='mb-4'
+            width="200"
+            height="200"
             src={breed?.breedImage[0]?.url}
           />
         </Col>
-        <Col>
+        <Col xs='12' md='7'>
           <BreedInfoCounter>
             <Link to={`/breed/${breed.name}`}>
               <span>{breed?.name}</span>

@@ -25,6 +25,9 @@ const GlobalStyles = () => (
           textDecoration: 'none',
           color: 'inherit'
       },
+      img: {
+        maxWidth: '100%'
+      },
       body: {
         margin: 0,
         padding: 0,

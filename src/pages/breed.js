@@ -1,6 +1,7 @@
 import React from "react";
 import { gql, useQuery } from "@apollo/client";
-import { Layout, QueryResult } from "../components";
+import Layout from '../containers/layout';
+import QueryResult  from "../components/query-result";
 import BreedDetail from "../components/breed-detail";
 
 export const GET_BREED = gql`

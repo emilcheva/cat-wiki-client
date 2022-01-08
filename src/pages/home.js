@@ -1,7 +1,8 @@
 import React from "react";
 import { gql, useQuery } from "@apollo/client";
-import { Layout, QueryResult } from "../components";
 import HeroBanner from "../components/hero-banner";
+import Layout from '../containers/layout';
+import QueryResult  from "../components/query-result";
 import { colors } from "../styles";
 import { Link } from "@reach/router";
 import styled from "@emotion/styled";
@@ -34,19 +35,19 @@ const Home = () => {
         <Container>
           <Row>
             <p>Most Searched Breeds</p>
-            <FlexContainer justifyContent='space-between' alignItems='flex-end' className='my-4'>
-              <h2 className="mb-0">66+ Breeds For You to Discover</h2>
+            <FlexContainer justifyContent='space-between' alignItems='flex-end' >
+              <h2 className='mb-3 mb-md-0'>66+ Breeds For You to Discover</h2>
               <LinkArrow to="/top-breeds">See More</LinkArrow>
             </FlexContainer>
           </Row>
           <Row>
             <QueryResult error={error} loading={loading} data={data}>
               {data?.getBreeds?.map((breed) => (
-                <Col key={breed.id}>
+                <Col key={breed.id} sm='6' lg='3' className='mt-5'>
                   <ImageWrapper
                     src={breed.breedImage[0].url}
-                    width="200"
-                    height="200"
+                    width="220"
+                    height="220"
                     alt={breed.name}
                   />
                   <StyledLink to={`/breed/${breed.name}`}>
@@ -60,8 +61,8 @@ const Home = () => {
       </TopBreedsSection>
       <WhyCatSection>
         <Container>
-          <Row>
-            <Col md="4">
+          <Row className='align-items-center'>
+            <Col lg="6">
               <h2>Why should you have a cat?</h2>
               <p>
                 Having a cat around you can actually trigger the release of
@@ -70,21 +71,20 @@ const Home = () => {
               </p>
               <LinkArrow isInternalLink='false' to='https://animalkind.org/blog/top-5-reasons-cat/'>Read More</LinkArrow>
             </Col>
-            <Col md="8">
-              <Row xs="auto">
-                <Col>
+            <Col lg="6" className='mt-5 mt-lg-0'>
+              <Row>
+                <Col xs='6'>
                   <FlexContainer direction="vertical" alignItems="flex-end">
-                    <img src={cat2} width="270" alt="hugging cat"></img>
+                    <img src={cat2} alt="hugging cat"></img>
                     <img
-                      className="mt-4"
+                      className="mt-4 ps-4 ps-md-5"
                       src={cat1}
-                      width="195"
                       alt="cat paw"
                     ></img>
                   </FlexContainer>
                 </Col>
-                <Col>
-                  <img src={cat3} width="238" alt="cat in bag"></img>
+                <Col xs='6'>
+                  <img src={cat3} alt="cat in bag"></img>
                 </Col>
               </Row>
             </Col>
@@ -102,6 +102,7 @@ const StyledLink = styled(Link)({
   textAlign: "left",
   color: colors.accent,
   cursor: "pointer",
+  marginTop: '20px'
 });
 
 const TopBreedsSection = styled.section({

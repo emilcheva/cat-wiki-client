@@ -9,9 +9,13 @@ const ImageWrapper = ({ src, width, height, alt, className }) => {
 
 export default ImageWrapper;
 
-const Image = styled.img({
-    objectFit: 'cover',
-    borderRadius: '24px',
-    width: '100%',
-    height: '250px',
-})
+const Image = styled.img(`
+    object-fit: cover;
+    border-radius: 24px;
+    max-width: 100%;
+   
+    @media (max-width: 768px) {
+      height: 200px;
+      width: 200px;
+    }
+`)
