@@ -1,8 +1,9 @@
-import React from "react";
-import { gql, useQuery } from "@apollo/client";
+import React from 'react';
+import { gql, useQuery } from '@apollo/client';
 import Layout from '../containers/layout';
-import QueryResult  from "../components/query-result";
-import BreedDetail from "../components/breed-detail";
+import QueryResult from '../components/query-result';
+import BreedDetail from '../components/breed-detail';
+import PropTypes from 'prop-types';
 
 export const GET_BREED = gql`
   query getBreed($breedName: String!) {
@@ -31,17 +32,21 @@ export const GET_BREED = gql`
 
 const Breed = ({ breedName }) => {
   const { loading, error, data } = useQuery(GET_BREED, {
-    variables: { breedName },
+    variables: { breedName }
   });
   return (
     <Layout>
       <QueryResult error={error} loading={loading} data={data}>
-      {data?.getBreedsByName?.map((breed) => (
-           <BreedDetail key={breed.id} breed={breed} />
+        {data?.getBreedsByName?.map((breed) => (
+          <BreedDetail key={breed.id} breed={breed} />
         ))}
       </QueryResult>
     </Layout>
   );
+};
+
+Breed.propTypes = {
+  breedName: PropTypes.string.isRequired
 };
 
 export default Breed;

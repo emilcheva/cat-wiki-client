@@ -1,18 +1,18 @@
-import React from "react";
-import { gql, useQuery } from "@apollo/client";
-import HeroBanner from "../components/hero-banner";
-import Layout from "../containers/layout";
-import QueryResult from "../components/query-result";
-import { colors } from "../styles";
-import { Link } from "@reach/router";
-import styled from "@emotion/styled";
-import ImageWrapper from "../components/image-wrapper";
-import FlexContainer from "../containers/flex";
-import { Row, Container, Col } from "react-bootstrap";
-import cat1 from "../assets/image 1.png";
-import cat2 from "../assets/image 2.png";
-import cat3 from "../assets/image 3.png";
-import LinkArrow from "../components/link-arrow";
+import React from 'react';
+import { gql, useQuery } from '@apollo/client';
+import HeroBanner from '../components/hero-banner';
+import Layout from '../containers/layout';
+import QueryResult from '../components/query-result';
+import { colors } from '../styles';
+import { Link } from '@reach/router';
+import styled from '@emotion/styled';
+import ImageWrapper from '../components/image-wrapper';
+import FlexContainer from '../containers/flex';
+import { Row, Container, Col } from 'react-bootstrap';
+import cat1 from '../assets/image 1.png';
+import cat2 from '../assets/image 2.png';
+import cat3 from '../assets/image 3.png';
+import LinkArrow from '../components/link-arrow';
 
 export const GET_BREEDS = gql`
   query getBreeds {
@@ -32,7 +32,7 @@ const Home = () => {
     <Layout>
       <HeroBanner />
       <TopBreedsSection>
-        <Container className='p-0'>
+        <Container className="p-0">
           <Row>
             <p>Most Searched Breeds</p>
             <FlexContainer justifyContent="space-between" alignItems="flex-end">
@@ -50,9 +50,7 @@ const Home = () => {
                     height="220"
                     alt={breed.name}
                   />
-                  <StyledLink to={`/breed/${breed.name}`}>
-                    {breed.name}
-                  </StyledLink>
+                  <StyledLink to={`/breed/${breed.name}`}>{breed.name}</StyledLink>
                 </Col>
               ))}
             </QueryResult>
@@ -65,14 +63,10 @@ const Home = () => {
             <Col lg="6">
               <h2>Why should you have a cat?</h2>
               <p>
-                Having a cat around you can actually trigger the release of
-                calming chemicals in your body which lower your stress and
-                anxiety leves
+                Having a cat around you can actually trigger the release of calming chemicals in
+                your body which lower your stress and anxiety leves
               </p>
-              <LinkArrow
-                isInternalLink="false"
-                to="https://animalkind.org/blog/top-5-reasons-cat/"
-              >
+              <LinkArrow isInternalLink="false" to="https://animalkind.org/blog/top-5-reasons-cat/">
                 Read More
               </LinkArrow>
             </Col>
@@ -81,11 +75,7 @@ const Home = () => {
                 <Col xs="6">
                   <FlexContainer direction="vertical" alignItems="flex-end">
                     <img src={cat2} alt="hugging cat"></img>
-                    <img
-                      className="mt-4 ps-4 ps-md-5"
-                      src={cat1}
-                      alt="cat paw"
-                    ></img>
+                    <img className="mt-4 ps-4 ps-md-5" src={cat1} alt="cat paw"></img>
                   </FlexContainer>
                 </Col>
                 <Col xs="6">
@@ -103,11 +93,11 @@ const Home = () => {
 export default Home;
 
 const StyledLink = styled(Link)({
-  display: "block",
-  textAlign: "left",
+  display: 'block',
+  textAlign: 'left',
   color: colors.accent,
-  cursor: "pointer",
-  marginTop: "20px",
+  cursor: 'pointer',
+  marginTop: '20px'
 });
 
 const TopBreedsSection = styled.section`

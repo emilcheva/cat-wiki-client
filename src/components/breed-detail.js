@@ -1,45 +1,38 @@
-import React from "react";
-import FlexContainer from "../containers/flex";
-import Score from "./score";
-import ImageWrapper from "./image-wrapper";
-import { Row, Col } from "react-bootstrap";
-import BreedDetailItem from "./breed-detail-item";
+import React from 'react';
+import Score from './score';
+import ImageWrapper from './image-wrapper';
+import { Row, Col } from 'react-bootstrap';
+import BreedDetailItem from './breed-detail-item';
+import PropTypes from 'prop-types';
 
 /**
  * Breed Detail component renders the main content of a given breed and an image
  */
 
-const BreedDetail = ({ breed }) => {
-  const {
-    description,
-    name,
-    temperament,
-    stranger_friendly,
-    social_needs,
-    health_issues,
-    intelligence,
-    grooming,
-    child_friendly,
-    affection_level,
-    adaptability,
-    life_span,
-    origin,
-    breedImage,
-  } = breed;
-
+const BreedDetail = ({
+  description,
+  name,
+  temperament,
+  stranger_friendly,
+  social_needs,
+  health_issues,
+  intelligence,
+  grooming,
+  child_friendly,
+  affection_level,
+  adaptability,
+  life_span,
+  origin,
+  breedImage
+}) => {
   return (
     <>
       <section>
         <Row>
           <Col xs="auto" className="mb-4 me-lg-5">
-            <ImageWrapper
-              width="270"
-              height='270'
-              src={breedImage[0].url}
-              alt={name}
-            />
+            <ImageWrapper width="270" height="270" src={breedImage[0].url} alt={name} />
           </Col>
-          <Col lg='6'>
+          <Col lg="6">
             <h2>{name}</h2>
             <p>{description}</p>
             <Row>
@@ -85,21 +78,32 @@ const BreedDetail = ({ breed }) => {
       <section className="my-5">
         <h2>Other photos</h2>
         <Row>
-          {breedImage.map((image) => (
-            <Col sm='6' lg='3' className='mb-4'>
-              <ImageWrapper
-                key={image.id}
-                src={image.url}
-                width='100%'
-                height='250'
-                alt={name}
-              />
+          {breedImage.map((image, index) => (
+            <Col sm="6" lg="3" className="mb-4" key={index}>
+              <ImageWrapper key={image.id} src={image.url} width="100%" height="250" alt={name} />
             </Col>
           ))}
         </Row>
       </section>
     </>
   );
+};
+
+BreedDetail.propTypes = {
+  description: PropTypes.string,
+  name: PropTypes.string,
+  temperament: PropTypes.string,
+  stranger_friendly: PropTypes.number,
+  social_needs: PropTypes.number,
+  health_issues: PropTypes.number,
+  intelligence: PropTypes.number,
+  grooming: PropTypes.number,
+  child_friendly: PropTypes.number,
+  affection_level: PropTypes.number,
+  adaptability: PropTypes.number,
+  life_span: PropTypes.number,
+  origin: PropTypes.string,
+  breedImage: PropTypes.array
 };
 
 export default BreedDetail;

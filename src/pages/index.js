@@ -9,7 +9,7 @@ export default function Pages() {
     <Router primary={false} component={Fragment}>
       <Home path="/" />
       <TopBreeds path="/top-breeds" />
-      <Breed path='/breed/:breedName' />
+      <Breed path="/breed/:breedName" />
     </Router>
   );
 }

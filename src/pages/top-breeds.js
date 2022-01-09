@@ -1,9 +1,9 @@
-import React from "react";
-import { gql, useQuery } from "@apollo/client";
-import BreedShortDetail from "../components/breed-short-detail";
-import styled from "@emotion/styled";
+import React from 'react';
+import { gql, useQuery } from '@apollo/client';
+import BreedShortDetail from '../components/breed-short-detail';
+import styled from '@emotion/styled';
 import Layout from '../containers/layout';
-import QueryResult  from "../components/query-result";
+import QueryResult from '../components/query-result';
 
 export const GET_TOP_BREEDS = gql`
   query getBreeds($limit: Int) {
@@ -31,21 +31,21 @@ export const GET_TOP_BREEDS = gql`
 
 const TopBreeds = () => {
   const { loading, error, data } = useQuery(GET_TOP_BREEDS, {
-    variables: { limit: 10 },
+    variables: { limit: 10 }
   });
   return (
     <Layout>
       <TopBreedsContainer>
-      <h2>Top 10 most searched breeds</h2>
-      <QueryResult error={error} loading={loading} data={data}>
-        <ul className="mt-5">
-          {data?.getBreeds?.map((breed) => (
-            <li key={breed.id}>
-              <BreedShortDetail breed={breed} />
-            </li>
-          ))}
-        </ul>
-      </QueryResult>
+        <h2>Top 10 most searched breeds</h2>
+        <QueryResult error={error} loading={loading} data={data}>
+          <ul className="mt-5">
+            {data?.getBreeds?.map((breed) => (
+              <li key={breed.id}>
+                <BreedShortDetail breed={breed} />
+              </li>
+            ))}
+          </ul>
+        </QueryResult>
       </TopBreedsContainer>
     </Layout>
   );
@@ -54,5 +54,5 @@ const TopBreeds = () => {
 export default TopBreeds;
 
 const TopBreedsContainer = styled.div({
-  counterReset: "my-counter"
+  counterReset: 'my-counter'
 });

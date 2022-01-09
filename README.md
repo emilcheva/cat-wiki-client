@@ -1,4 +1,3 @@
-
 <h1 align="center">Cat Wiki</h1>
 
 <div align="center">

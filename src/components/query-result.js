@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { LoadingSpinner } from '@apollo/space-kit/Loaders/LoadingSpinner';
+import PropTypes from 'prop-types';
+import { ApolloError } from '@apollo/client';
 
 /**
  * Query Results conditionally renders Apollo useQuery hooks states:
@@ -25,6 +27,13 @@ const QueryResult = ({ loading, error, data, children }) => {
   }
 };
 
+QueryResult.propTypes = {
+  loading: PropTypes.bool,
+  error: PropTypes.instanceOf(ApolloError),
+  data: PropTypes.any,
+  children: PropTypes.any
+};
+
 export default QueryResult;
 
 /** Query Result styled components */
@@ -33,5 +42,5 @@ const SpinnerContainer = styled.div({
   justifyContent: 'center',
   alignItems: 'center',
   width: '100%',
-  height: '100vh',
+  height: '100vh'
 });
