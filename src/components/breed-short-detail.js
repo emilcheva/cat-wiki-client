@@ -15,7 +15,7 @@ const BreedShortDetail = ({ breedImage, name, description }) => {
     <BreedInfo>
       <Row className="align-items-center">
         <Col xs="auto" className="me-md-4 mb-3">
-          <ImageWrapper className="mb-4" width="200" height="200" src={breedImage[0]?.url} />
+          <ImageWrapper className="mb-4" width="200" height="200" src={breedImage.url} />
         </Col>
         <Col xs="12" md="7">
           <BreedInfoCounter>
@@ -31,7 +31,7 @@ const BreedShortDetail = ({ breedImage, name, description }) => {
 };
 
 BreedShortDetail.propTypes = {
-  breedImage: PropTypes.array,
+  breedImage: PropTypes.object,
   name: PropTypes.string,
   description: PropTypes.string
 };

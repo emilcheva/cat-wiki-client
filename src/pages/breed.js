@@ -12,15 +12,15 @@ export const GET_BREED = gql`
       description
       name
       temperament
-      stranger_friendly
-      social_needs
-      health_issues
+      strangerFriendly
+      socialNeeds
+      healthIssues
       intelligence
       grooming
-      child_friendly
-      affection_level
+      childFriendly
+      affectionLevel
       adaptability
-      life_span
+      lifeSpan
       origin
       breedImage {
         url
@@ -38,7 +38,7 @@ const Breed = ({ breedName }) => {
     <Layout>
       <QueryResult error={error} loading={loading} data={data}>
         {data?.getBreedsByName?.map((breed) => (
-          <BreedDetail key={breed.id} breed={breed} />
+          <BreedDetail key={breed.id} breed={breed} breedImage={breed.breedImage} />
         ))}
       </QueryResult>
     </Layout>
@@ -46,7 +46,7 @@ const Breed = ({ breedName }) => {
 };
 
 Breed.propTypes = {
-  breedName: PropTypes.string.isRequired
+  breedName: PropTypes.string
 };
 
 export default Breed;

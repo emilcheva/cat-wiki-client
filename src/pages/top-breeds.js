@@ -11,15 +11,15 @@ export const GET_TOP_BREEDS = gql`
       description
       name
       temperament
-      stranger_friendly
-      social_needs
-      health_issues
+      strangerFriendly
+      socialNeeds
+      healthIssues
       intelligence
       grooming
-      child_friendly
-      affection_level
+      childFriendly
+      affectionLevel
       adaptability
-      life_span
+      lifeSpan
       origin
       id
       breedImage {
@@ -41,7 +41,11 @@ const TopBreeds = () => {
           <ul className="mt-5">
             {data?.getBreeds?.map((breed) => (
               <li key={breed.id}>
-                <BreedShortDetail breed={breed} />
+                <BreedShortDetail
+                  name={breed.name}
+                  description={breed.description}
+                  breedImage={breed.breedImage[0]}
+                />
               </li>
             ))}
           </ul>

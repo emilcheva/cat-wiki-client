@@ -9,22 +9,23 @@ import PropTypes from 'prop-types';
  * Breed Detail component renders the main content of a given breed and an image
  */
 
-const BreedDetail = ({
-  description,
-  name,
-  temperament,
-  stranger_friendly,
-  social_needs,
-  health_issues,
-  intelligence,
-  grooming,
-  child_friendly,
-  affection_level,
-  adaptability,
-  life_span,
-  origin,
-  breedImage
-}) => {
+const BreedDetail = ({ breed }) => {
+  const {
+    description,
+    name,
+    temperament,
+    strangerFriendly,
+    socialNeeds,
+    healthIssues,
+    intelligence,
+    grooming,
+    childFriendly,
+    affectionLevel,
+    adaptability,
+    lifeSpan,
+    origin,
+    breedImage
+  } = breed;
   return (
     <>
       <section>
@@ -44,16 +45,16 @@ const BreedDetail = ({
                   <span className="d-inline-block">{origin}</span>
                 </BreedDetailItem>
                 <BreedDetailItem text="Life Span">
-                  <span>{life_span} years</span>
+                  <span>{lifeSpan} years</span>
                 </BreedDetailItem>
                 <BreedDetailItem text="Adaptability">
                   <Score count={adaptability} />
                 </BreedDetailItem>
                 <BreedDetailItem text="Affection Level">
-                  <Score count={affection_level} />
+                  <Score count={affectionLevel} />
                 </BreedDetailItem>
                 <BreedDetailItem text="Child Friendly">
-                  <Score count={child_friendly} />
+                  <Score count={childFriendly} />
                 </BreedDetailItem>
                 <BreedDetailItem text="Grooming">
                   <Score count={grooming} />
@@ -62,13 +63,13 @@ const BreedDetail = ({
                   <Score count={intelligence} />
                 </BreedDetailItem>
                 <BreedDetailItem text="Health issues">
-                  <Score count={health_issues} />
+                  <Score count={healthIssues} />
                 </BreedDetailItem>
                 <BreedDetailItem text="Social Needs">
-                  <Score count={social_needs} />
+                  <Score count={socialNeeds} />
                 </BreedDetailItem>
                 <BreedDetailItem text="Stranger friendly">
-                  <Score count={stranger_friendly} />
+                  <Score count={strangerFriendly} />
                 </BreedDetailItem>
               </Col>
             </Row>
@@ -90,18 +91,19 @@ const BreedDetail = ({
 };
 
 BreedDetail.propTypes = {
+  breed: PropTypes.object,
   description: PropTypes.string,
   name: PropTypes.string,
   temperament: PropTypes.string,
-  stranger_friendly: PropTypes.number,
-  social_needs: PropTypes.number,
-  health_issues: PropTypes.number,
+  strangerFriendly: PropTypes.number,
+  socialNeeds: PropTypes.number,
+  healthIssues: PropTypes.number,
   intelligence: PropTypes.number,
   grooming: PropTypes.number,
-  child_friendly: PropTypes.number,
-  affection_level: PropTypes.number,
+  childFriendly: PropTypes.number,
+  affectionLevel: PropTypes.number,
   adaptability: PropTypes.number,
-  life_span: PropTypes.number,
+  lifeSpan: PropTypes.number,
   origin: PropTypes.string,
   breedImage: PropTypes.array
 };
