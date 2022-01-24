@@ -4,6 +4,7 @@ import { colors } from '../styles';
 import CatWikiIcon from './cat-wiki-icon';
 import heroImg from '../assets/HeroImagelg.png';
 import FlexContainer from '../containers/flex';
+import Autocomplete from './autocomplete';
 
 const HeroBanner = () => {
   return (
@@ -11,6 +12,7 @@ const HeroBanner = () => {
       <FlexContainer direction="vertical">
         <CatWikiIcon width="220px" color={colors.light} />
         <p>Get to know more about your cat breed</p>
+        <Autocomplete />
       </FlexContainer>
     </HeroContainer>
   );
