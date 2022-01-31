@@ -6,7 +6,7 @@ import BreedDetail from '../components/breed-detail';
 import PropTypes from 'prop-types';
 
 export const GET_BREED = gql`
-  query getBreed($breedName: String!) {
+  query getBreedsByName($breedName: String!) {
     getBreedsByName(breedName: $breedName) {
       id
       description
