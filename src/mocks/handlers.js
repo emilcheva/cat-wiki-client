@@ -73,17 +73,26 @@ export const handlers = [
 
   // Handles a "GetBreedsByName" query
   graphql.query('getAutoCompleteBreed', (req, res, ctx) => {
-    return res(
-      ctx.data({
-        getBreedsByName: [
-          {
-            id: 'poly',
-            name: 'Polydactyl',
-            __typename: 'Breed'
-          },
-          { id: 'csho', name: 'Colorpoint Shorthair', __typename: 'Breed' }
-        ]
-      })
-    );
+    const { breedName } = req.variables;
+    if (breedName === 'po') {
+      return res(
+        ctx.data({
+          getBreedsByName: [
+            {
+              id: 'poly',
+              name: 'Polydactyl',
+              __typename: 'Breed'
+            },
+            { id: 'csho', name: 'Colorpoint Shorthair', __typename: 'Breed' }
+          ]
+        })
+      );
+    } else if (breedName === 'brv') {
+      return res(
+        ctx.data({
+          getBreedsByName: []
+        })
+      );
+    }
   })
 ];

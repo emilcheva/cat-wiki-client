@@ -31,7 +31,6 @@ const BreedDetail = ({ breed }) => {
       <section>
         <Row>
           <Col xs="auto" className="mb-4 me-lg-5">
-            (
             <ImageWrapper
               width="270"
               height="270"
@@ -42,7 +41,6 @@ const BreedDetail = ({ breed }) => {
               }
               alt={name}
             />
-            )
           </Col>
           <Col lg="6">
             <h2>{name}</h2>
@@ -93,14 +91,8 @@ const BreedDetail = ({ breed }) => {
             <h2>Other photos</h2>
             <Row>
               {breedImage.map((image) => (
-                <Col sm="6" lg="3" className="mb-4" key={breedImage.id}>
-                  <ImageWrapper
-                    key={image.id}
-                    src={image.url}
-                    width="100%"
-                    height="250"
-                    alt={name}
-                  />
+                <Col sm="6" lg="3" className="mb-4" key={image.id}>
+                  <ImageWrapper src={image.url} width="100%" height="250" alt={name} />
                 </Col>
               ))}
             </Row>

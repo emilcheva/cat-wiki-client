@@ -23,37 +23,38 @@ describe('Autocomplete w getBreedsByName query', () => {
     userEvent.type(screen.getByPlaceholderText(/enter your breed/i), 'po');
 
     await waitFor(() => {
+      expect(screen.queryAllByTestId('suggestions-list')[0]).toBeInTheDocument();
       expect(screen.queryAllByTestId('suggestions-list')).toMatchInlineSnapshot(`
-          Array [
-            <ul
-              class="css-1vaqrnj"
-              data-testid="suggestions-list"
-            >
-              <li>
-                <a
-                  href="/breed/Polydactyl"
+        Array [
+          <ul
+            class="css-1vaqrnj"
+            data-testid="suggestions-list"
+          >
+            <li>
+              <a
+                href="/breed/Polydactyl"
+              >
+                <span
+                  class="css-1gd2a80"
                 >
-                  <span
-                    class="css-1gd2a80"
-                  >
-                    Polydactyl
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/breed/Colorpoint Shorthair"
+                  Polydactyl
+                </span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="/breed/Colorpoint Shorthair"
+              >
+                <span
+                  class="css-pahk93"
                 >
-                  <span
-                    class="css-pahk93"
-                  >
-                    Colorpoint Shorthair
-                  </span>
-                </a>
-              </li>
-            </ul>,
-          ]
-        `);
+                  Colorpoint Shorthair
+                </span>
+              </a>
+            </li>
+          </ul>,
+        ]
+      `);
     });
   });
 
@@ -73,7 +74,16 @@ describe('Autocomplete w getBreedsByName query', () => {
     expect(screen.getByDisplayValue(/Polydactyl/i)).toBeInTheDocument();
   });
 
-  it('should show text when breed name is deleted', async () => {
+  it('should show text when there is no breed with this name', async () => {
+    autoCompleteSetup();
+    userEvent.type(screen.getByPlaceholderText(/enter your breed/i), 'brv');
+
+    await waitFor(() => {
+      expect(screen.queryByText(/sorry, no cat breeds found/i)).toBeInTheDocument();
+    });
+  });
+
+  it('should not show text when breed name is deleted', async () => {
     autoCompleteSetup();
     userEvent.type(screen.getByPlaceholderText(/enter your breed/i), 'po');
 
@@ -83,6 +93,6 @@ describe('Autocomplete w getBreedsByName query', () => {
     screen.getByPlaceholderText(/enter your breed/i).focus();
     userEvent.clear(screen.getByRole('textbox'));
     expect(screen.getByRole('textbox')).toHaveAttribute('value', '');
-    expect(screen.getByText(/sorry, no cat breeds found/i)).toBeInTheDocument();
+    expect(screen.queryByText(/sorry, no cat breeds found/i)).not.toBeInTheDocument();
   });
 });

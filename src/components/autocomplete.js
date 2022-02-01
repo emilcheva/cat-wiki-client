@@ -37,12 +37,17 @@ const Autocomplete = () => {
 
   useEffect(() => {
     debouncedApiCall(input);
+
+    return () => {
+      debouncedApiCall.cancel();
+    };
   }, [input, debouncedApiCall]);
 
   useEffect(() => {
     if (data && !loading) {
-      setShowSuggestions(true);
+      setActiveSuggestionIndex(0);
       setSuggestions(data?.getBreedsByName);
+      setShowSuggestions(true);
     }
   }, [data, loading]);
 
@@ -63,7 +68,7 @@ const Autocomplete = () => {
     }
     // down arrow
     else if (e.keyCode === 40) {
-      if (activeSuggestionIndex - 1 === suggestions.length) {
+      if (activeSuggestionIndex === suggestions.length - 1) {
         return;
       }
 
@@ -102,7 +107,7 @@ const Autocomplete = () => {
               suggestions={suggestions}
             />
           )
-        : showSuggestions && input && <small className="ms-3">Sorry, no cat breeds found</small>}
+        : showSuggestions && !!input && <small className="ms-3">Sorry, no cat breeds found</small>}
     </>
   );
 };
