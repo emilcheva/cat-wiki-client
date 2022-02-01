@@ -1,10 +1,8 @@
 import { server } from './server';
 
-export const setupServer = function () {
+export const setupServer = () => {
   beforeAll(() => {
-    server.listen({
-      onUnhandledRequest: 'warn'
-    });
+    server.listen();
   });
 
   afterEach(() => {

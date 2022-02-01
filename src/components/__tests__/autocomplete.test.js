@@ -6,6 +6,8 @@ import { client } from '../../ApolloClient';
 import { setupServer } from '../../mocks/setupServer';
 import Autocomplete from '../autocomplete';
 
+const ENTER_KEY_CODE = 13;
+
 const autoCompleteSetup = () => {
   render(
     <ApolloProvider client={client}>
@@ -14,14 +16,13 @@ const autoCompleteSetup = () => {
   );
 };
 
-describe('Testing Autocomplete w getBreedsByName query', () => {
+describe('Autocomplete w getBreedsByName query', () => {
   setupServer();
   it('should render Autocomplete results when text is entered', async () => {
     autoCompleteSetup();
     userEvent.type(screen.getByPlaceholderText(/enter your breed/i), 'po');
 
     await waitFor(() => {
-      expect(screen.queryAllByTestId('suggestions-list')[0]).toBeInTheDocument();
       expect(screen.queryAllByTestId('suggestions-list')).toMatchInlineSnapshot(`
           Array [
             <ul
@@ -64,10 +65,9 @@ describe('Testing Autocomplete w getBreedsByName query', () => {
       expect(screen.queryAllByTestId('suggestions-list')[0]).toBeInTheDocument();
     });
     screen.getByPlaceholderText(/enter your breed/i).focus();
-    fireEvent.keyDown(document.activeElement || document.body, {
+    fireEvent.keyDown(document.activeElement, {
       key: 'Enter',
-      keyCode: 13,
-      which: 13
+      keyCode: ENTER_KEY_CODE
     });
 
     expect(screen.getByDisplayValue(/Polydactyl/i)).toBeInTheDocument();

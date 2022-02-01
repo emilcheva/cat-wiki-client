@@ -6,7 +6,7 @@ import TopBreeds from '../../pages/top-breeds';
 import { setupServer } from '../../mocks/setupServer';
 import Breed from '../../pages/breed';
 
-describe('Testing TopBreeds w getBreeds query', () => {
+describe('TopBreeds w getBreeds query', () => {
   setupServer();
   it('should render TopBreeds component', async () => {
     render(
@@ -16,11 +16,11 @@ describe('Testing TopBreeds w getBreeds query', () => {
     );
 
     const breedName = await screen.findByText('British Shorthair');
-    expect(breedName).toBeTruthy();
+    expect(breedName).toBeInTheDocument();
   });
 });
 
-describe('Testing Breed w getBreedsByName query', () => {
+describe('Breed w getBreedsByName query', () => {
   setupServer();
   it('should render Breed component', async () => {
     render(
@@ -30,8 +30,8 @@ describe('Testing Breed w getBreedsByName query', () => {
     );
 
     const breedName = await screen.findByText('Munchkin');
-    expect(breedName).toBeTruthy();
+    expect(breedName).toBeInTheDocument();
     const temperament = await screen.findByText(/agile, easy going, intelligent, playful/i);
-    expect(temperament).toBeTruthy();
+    expect(temperament).toBeInTheDocument();
   });
 });

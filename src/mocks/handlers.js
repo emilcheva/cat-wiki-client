@@ -3,7 +3,6 @@ import { graphql } from 'msw';
 export const handlers = [
   // Handles a "GetBreeds" query
   graphql.query('getBreeds', (req, res, ctx) => {
-    // const { limit } = req.variables;
     return res(
       ctx.data({
         getBreeds: [

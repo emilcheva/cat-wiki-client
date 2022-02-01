@@ -4,7 +4,7 @@ const cache = new InMemoryCache();
 
 const link = new HttpLink({
   uri: 'https://cat-wiki-apollo-server.herokuapp.com',
-  cache: new InMemoryCache()
+  cache: cache
 });
 
 // Isolate Apollo client so it could be reused

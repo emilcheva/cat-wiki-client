@@ -27,9 +27,9 @@ const Autocomplete = () => {
   const [getCatBreeds, { loading, data }] = useLazyQuery(GET_BREED);
 
   const debouncedApiCall = useCallback(
-    debounce((text) => {
+    debounce((breedName) => {
       getCatBreeds({
-        variables: { breedName: text }
+        variables: { breedName }
       });
     }, 500),
     []
