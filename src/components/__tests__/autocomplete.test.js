@@ -6,10 +6,9 @@ import { client } from '../../ApolloClient';
 import { setupServer } from '../../mocks/setupServer';
 import { server } from '../../mocks/server';
 import Autocomplete from '../autocomplete';
-import { jssPreset } from '@material-ui/core';
 
 const ENTER_KEY_CODE = 13;
-const REQUESTS_MAP = new Map();
+const requestsMap = new Map();
 
 const autoCompleteSetup = () => {
   render(
@@ -22,7 +21,7 @@ const autoCompleteSetup = () => {
 describe('Autocomplete w getBreedsByName query', () => {
   setupServer();
   server.events.on('request:start', (req) => {
-    REQUESTS_MAP.set(req.id, req.body.variables);
+    requestsMap.set(req.id, req.body.variables);
   });
 
   it('should render Autocomplete results when text is entered', async () => {
@@ -112,13 +111,11 @@ describe('Autocomplete w getBreedsByName query', () => {
       expect(screen.queryAllByTestId('suggestions-list')[0]).toBeInTheDocument();
     });
 
-    let getAllRequestVariables = [];
+    const getAllRequestVariables = [requestsMap.values()].map(({ breedName }) => breedName);
 
-    for (let [, value] of REQUESTS_MAP.entries()) {
-      getAllRequestVariables.push(value['breedName']);
-    }
-
-    expect(getAllRequestVariables.some((variable) => variable === 'p')).toBe(false);
-    expect(getAllRequestVariables.some((variable) => variable === 'pers')).toBe(true);
+    expect(getAllRequestVariables.some((variable) => variable === 'p')).toBeFalsy;
+    expect(getAllRequestVariables.some((variable) => variable === 'pe')).toBeFalsy;
+    expect(getAllRequestVariables.some((variable) => variable === 'per')).toBeFalsy;
+    expect(getAllRequestVariables.some((variable) => variable === 'pers')).toBeTruthy;
   });
 });
