@@ -6,6 +6,7 @@ import { client } from '../../ApolloClient';
 import { setupServer } from '../../mocks/setupServer';
 import { server } from '../../mocks/server';
 import Autocomplete from '../autocomplete';
+import { jssPreset } from '@material-ui/core';
 
 const ENTER_KEY_CODE = 13;
 const REQUESTS_MAP = new Map();
@@ -111,10 +112,13 @@ describe('Autocomplete w getBreedsByName query', () => {
       expect(screen.queryAllByTestId('suggestions-list')[0]).toBeInTheDocument();
     });
 
-    const getLastKeyInMap = (map) => [...map][map.size - 1][0];
+    let getAllRequestVariables = [];
 
-    expect(REQUESTS_MAP.get(getLastKeyInMap(REQUESTS_MAP))).toStrictEqual({
-      breedName: 'pers'
-    });
+    for (let [, value] of REQUESTS_MAP.entries()) {
+      getAllRequestVariables.push(value['breedName']);
+    }
+
+    expect(getAllRequestVariables.some((variable) => variable === 'p')).toBe(false);
+    expect(getAllRequestVariables.some((variable) => variable === 'pers')).toBe(true);
   });
 });
