@@ -86,7 +86,7 @@ const BreedDetail = ({ breed }) => {
         </Row>
       </section>
       <section className="my-5">
-        {breedImage.length ? (
+        {breedImage.length > 0 ? (
           <>
             <h2>Other photos</h2>
             <Row>

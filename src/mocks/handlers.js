@@ -1,7 +1,6 @@
 import { graphql } from 'msw';
 
 export const handlers = [
-  // Handles a "GetBreeds" query
   graphql.query('getBreeds', (req, res, ctx) => {
     return res(
       ctx.data({
@@ -36,7 +35,6 @@ export const handlers = [
     );
   }),
 
-  // Handles a "GetBreedsByName" query
   graphql.query('getBreedsByName', (req, res, ctx) => {
     return res(
       ctx.data({
@@ -71,7 +69,6 @@ export const handlers = [
     );
   }),
 
-  // Handles a "GetBreedsByName" query
   graphql.query('getAutoCompleteBreed', (req, res, ctx) => {
     const { breedName } = req.variables;
     if (breedName === 'po') {
@@ -87,7 +84,19 @@ export const handlers = [
           ]
         })
       );
-    } else if (breedName === 'brv') {
+    } else if (breedName === 'pers') {
+      return res(
+        ctx.data({
+          getBreedsByName: [
+            {
+              id: 'pers',
+              name: 'Persian',
+              __typename: 'Breed'
+            }
+          ]
+        })
+      );
+    } else {
       return res(
         ctx.data({
           getBreedsByName: []

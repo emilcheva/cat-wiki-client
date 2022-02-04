@@ -4,9 +4,11 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { client } from '../../ApolloClient';
 import { setupServer } from '../../mocks/setupServer';
+import { server } from '../../mocks/server';
 import Autocomplete from '../autocomplete';
 
 const ENTER_KEY_CODE = 13;
+const REQUESTS_MAP = new Map();
 
 const autoCompleteSetup = () => {
   render(
@@ -18,6 +20,10 @@ const autoCompleteSetup = () => {
 
 describe('Autocomplete w getBreedsByName query', () => {
   setupServer();
+  server.events.on('request:start', (req) => {
+    REQUESTS_MAP.set(req.id, req.body.variables);
+  });
+
   it('should render Autocomplete results when text is entered', async () => {
     autoCompleteSetup();
     userEvent.type(screen.getByPlaceholderText(/enter your breed/i), 'po');
@@ -94,5 +100,21 @@ describe('Autocomplete w getBreedsByName query', () => {
     userEvent.clear(screen.getByRole('textbox'));
     expect(screen.getByRole('textbox')).toHaveAttribute('value', '');
     expect(screen.queryByText(/sorry, no cat breeds found/i)).not.toBeInTheDocument();
+  });
+
+  it('typing should be debounced', async () => {
+    autoCompleteSetup();
+
+    userEvent.type(screen.getByPlaceholderText(/enter your breed/i), 'pers');
+
+    await waitFor(() => {
+      expect(screen.queryAllByTestId('suggestions-list')[0]).toBeInTheDocument();
+    });
+
+    const getLastKeyInMap = (map) => [...map][map.size - 1][0];
+
+    expect(REQUESTS_MAP.get(getLastKeyInMap(REQUESTS_MAP))).toStrictEqual({
+      breedName: 'pers'
+    });
   });
 });
