@@ -1,13 +1,11 @@
-import { HttpLink, InMemoryCache, ApolloClient } from '@apollo/client';
-
-const cache = new InMemoryCache();
+import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
 
 const link = new HttpLink({
-  uri: 'https://cat-wiki-apollo-server.herokuapp.com',
-  cache
+  uri: 'https://cat-wiki-apollo-server.herokuapp.com'
 });
 
-export const CREATE_CLIENT = new ApolloClient({
-  link,
-  cache
-});
+export const createClient = () =>
+  new ApolloClient({
+    cache: new InMemoryCache(),
+    link
+  });

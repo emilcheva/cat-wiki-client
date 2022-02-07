@@ -2,34 +2,35 @@ import React from 'react';
 import { ApolloProvider } from '@apollo/client';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { CREATE_CLIENT } from '../../ApolloClient';
+import { createClient } from '../../ApolloClient';
 import { server } from '../../mocks/server';
 import Autocomplete from '../autocomplete';
 
 const ENTER_KEY_CODE = 13;
 const requestsMap = new Map();
 
+const listener = (req) => requestsMap.set(req.id, req.body.variables);
+
 beforeAll(() => {
   server.listen();
   server.events.on('request:start', (req) => {
-    requestsMap.set(req.id, req.body.variables);
+    listener(req);
   });
 });
 
 afterEach(() => {
   requestsMap.clear();
-  CREATE_CLIENT.resetStore();
   server.resetHandlers();
 });
 
 afterAll(() => {
-  server.events.removeAllListeners();
+  server.events.removeListener('request:start', listener);
   server.close();
 });
 
 const autoCompleteSetup = () => {
   render(
-    <ApolloProvider client={CREATE_CLIENT}>
+    <ApolloProvider client={createClient()}>
       <Autocomplete />
     </ApolloProvider>
   );
@@ -103,7 +104,7 @@ describe('Autocomplete w getBreedsByName query', () => {
 
   it('should not show text when breed name is deleted', async () => {
     autoCompleteSetup();
-    userEvent.type(screen.getByPlaceholderText(/enter your breed/i), 'po');
+    userEvent.type(screen.getByPlaceholderText(/enter your breed/i), 'pers');
 
     await waitFor(() => {
       expect(screen.queryAllByTestId('suggestions-list')[0]).toBeInTheDocument();
