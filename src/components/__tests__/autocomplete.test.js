@@ -2,28 +2,40 @@ import React from 'react';
 import { ApolloProvider } from '@apollo/client';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { client } from '../../ApolloClient';
-import { setupServer } from '../../mocks/setupServer';
+import { CREATE_CLIENT } from '../../ApolloClient';
 import { server } from '../../mocks/server';
 import Autocomplete from '../autocomplete';
 
 const ENTER_KEY_CODE = 13;
 const requestsMap = new Map();
 
+beforeAll(() => {
+  server.listen();
+  server.events.on('request:start', (req) => {
+    requestsMap.set(req.id, req.body.variables);
+  });
+});
+
+afterEach(() => {
+  requestsMap.clear();
+  CREATE_CLIENT.resetStore();
+  server.resetHandlers();
+});
+
+afterAll(() => {
+  server.events.removeAllListeners();
+  server.close();
+});
+
 const autoCompleteSetup = () => {
   render(
-    <ApolloProvider client={client}>
+    <ApolloProvider client={CREATE_CLIENT}>
       <Autocomplete />
     </ApolloProvider>
   );
 };
 
 describe('Autocomplete w getBreedsByName query', () => {
-  setupServer();
-  server.events.on('request:start', (req) => {
-    requestsMap.set(req.id, req.body.variables);
-  });
-
   it('should render Autocomplete results when text is entered', async () => {
     autoCompleteSetup();
     userEvent.type(screen.getByPlaceholderText(/enter your breed/i), 'po');
@@ -111,11 +123,8 @@ describe('Autocomplete w getBreedsByName query', () => {
       expect(screen.queryAllByTestId('suggestions-list')[0]).toBeInTheDocument();
     });
 
-    const getAllRequestVariables = [requestsMap.values()].map(({ breedName }) => breedName);
+    const getAllRequestVariables = [...requestsMap.values()].map(({ breedName }) => breedName);
 
-    expect(getAllRequestVariables.some((variable) => variable === 'p')).toBeFalsy;
-    expect(getAllRequestVariables.some((variable) => variable === 'pe')).toBeFalsy;
-    expect(getAllRequestVariables.some((variable) => variable === 'per')).toBeFalsy;
-    expect(getAllRequestVariables.some((variable) => variable === 'pers')).toBeTruthy;
+    expect(getAllRequestVariables).toEqual(['pers']);
   });
 });

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ApolloProvider } from '@apollo/client';
+import { CREATE_CLIENT } from '../../ApolloClient';
 import { render, screen } from '@testing-library/react';
-import { client } from '../../ApolloClient';
 import TopBreeds from '../../pages/top-breeds';
 import { setupServer } from '../../mocks/setupServer';
 import Breed from '../../pages/breed';
@@ -10,7 +10,7 @@ describe('TopBreeds w getBreeds query', () => {
   setupServer();
   it('should render TopBreeds component', async () => {
     render(
-      <ApolloProvider client={client}>
+      <ApolloProvider client={CREATE_CLIENT}>
         <TopBreeds />
       </ApolloProvider>
     );
@@ -24,7 +24,7 @@ describe('Breed w getBreedsByName query', () => {
   setupServer();
   it('should render Breed component', async () => {
     render(
-      <ApolloProvider client={client}>
+      <ApolloProvider client={CREATE_CLIENT}>
         <Breed breedName="Munchkin" />
       </ApolloProvider>
     );
