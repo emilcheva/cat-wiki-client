@@ -134,20 +134,18 @@ describe('Autocomplete w getBreedsByName query', () => {
     autoCompleteSetup();
 
     const searchInput = screen.getByPlaceholderText(/enter your breed/i);
-    let typed = [];
 
     await userEvent.type(searchInput, 'sphynx');
 
     act(() => {
       jest.advanceTimersByTime(499);
     });
-    expect([...requestsMap.values()].length).toEqual(0);
+    expect([...requestsMap.values()]).toHaveLength(0)
     act(() => {
-      jest.advanceTimersByTime(501);
-      typed.push(searchInput.value);
+      jest.advanceTimersByTime(1);
     });
     const getAllRequestVariables = [...requestsMap.values()].map(({ breedName }) => breedName);
-    expect(getAllRequestVariables).toEqual([...typed]);
+    expect(getAllRequestVariables).toEqual(['sphynx']);
 
     jest.useRealTimers();
   });
