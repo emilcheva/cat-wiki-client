@@ -1,6 +1,6 @@
 import React from 'react';
 import { ApolloProvider } from '@apollo/client';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createClient } from '../../ApolloClient';
 import { server } from '../../mocks/server';
@@ -127,5 +127,28 @@ describe('Autocomplete w getBreedsByName query', () => {
     const getAllRequestVariables = [...requestsMap.values()].map(({ breedName }) => breedName);
 
     expect(getAllRequestVariables).toEqual(['pers']);
+  });
+
+  it('should not send request for fast typing ( keystroke faster than 500ms )', async () => {
+    jest.useFakeTimers('modern');
+    autoCompleteSetup();
+
+    const searchInput = screen.getByPlaceholderText(/enter your breed/i);
+    let typed = [];
+
+    await userEvent.type(searchInput, 'sphynx');
+
+    act(() => {
+      jest.advanceTimersByTime(499);
+    });
+    expect([...requestsMap.values()].length).toEqual(0);
+    act(() => {
+      jest.advanceTimersByTime(501);
+      typed.push(searchInput.value);
+    });
+    const getAllRequestVariables = [...requestsMap.values()].map(({ breedName }) => breedName);
+    expect(getAllRequestVariables).toEqual([...typed]);
+
+    jest.useRealTimers();
   });
 });

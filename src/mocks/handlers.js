@@ -84,6 +84,18 @@ export const handlers = [
           ]
         })
       );
+    } else if (breedName === 'sphynx') {
+      return res(
+        ctx.data({
+          getBreedsByName: [
+            {
+              id: 'sphynx',
+              name: 'Sphynx',
+              __typename: 'Breed'
+            }
+          ]
+        })
+      );
     } else if (breedName === 'pers') {
       return res(
         ctx.data({
