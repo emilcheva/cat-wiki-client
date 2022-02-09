@@ -34,13 +34,12 @@
 - [Features](#features)
 - [How to use](#how-to-use)
 - [Contact](#contact)
-- [Acknowledgements](#acknowledgements)
 
 <!-- OVERVIEW -->
 
 ## Overview
 
-![screenshot](https://user-images.githubusercontent.com/16707738/92399059-5716eb00-f132-11ea-8b14-bcacdc8ec97b.png)
+![screenshot](screenshot.png "Cat Wiki")
 
 - Where can I see your demo ->
 - You can query the GraphQL schema with Apollo Studio here -> https://react-bootstrap.github.io/
@@ -54,6 +53,9 @@
 - [Emotion](https://emotion.sh/docs/introduction)
 - [GraphQL](https://graphql.org/)
 - [Apollo Graph Platform and Studio](https://www.apollographql.com/)
+- [MSW](https://mswjs.io/)
+- [Jest](https://jestjs.io/docs/getting-started)
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
 
 ## Features
 
@@ -77,15 +79,6 @@ $ npm install
 # Run the app
 $ npm start
 ```
-
-## Acknowledgements
-
-<!-- This section should list any articles or add-ons/plugins that helps you to complete the project. This is optional but it will help you in the future. For example: -->
-
-- [Steps to replicate a design with only HTML and CSS](https://devchallenges-blogs.web.app/how-to-replicate-design/)
-- [Node.js](https://nodejs.org/)
-- [Marked - a markdown parser](https://github.com/chjj/marked)
-
 ## Contact
 
 - Linkedin [evgenia milcheva](https://www.linkedin.com/in/evgenia-milcheva/)
