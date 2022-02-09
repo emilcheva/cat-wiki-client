@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 
 const SuggestionsList = ({ activeSuggestionIndex, suggestions }) => {
   return (
-    <LinkList>
+    <LinkList data-testid="suggestions-list">
       {suggestions.map((suggestion, index) => (
         <li key={suggestion.id}>
           <Link to={`/breed/${suggestion.name}`}>

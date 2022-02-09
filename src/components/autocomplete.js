@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { gql, useLazyQuery } from '@apollo/client';
 import SuggestionsList from './suggestions-list';
 import debounce from 'lodash.debounce';
@@ -8,7 +8,7 @@ import styled from '@emotion/styled';
 import { colors } from '../styles';
 
 export const GET_BREED = gql`
-  query getBreed($breedName: String!) {
+  query getAutoCompleteBreed($breedName: String!) {
     getBreedsByName(breedName: $breedName) {
       id
       name
@@ -26,36 +26,35 @@ const Autocomplete = () => {
   const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(0);
   const [getCatBreeds, { loading, data }] = useLazyQuery(GET_BREED);
 
-  function changeHandler(query) {
-    if (!query) return setSuggestions([]);
-    setInput(query);
-
-    const debouncedChangeFilter = debounce(() => {
+  const debouncedApiCall = useCallback(
+    debounce((breedName) => {
       getCatBreeds({
-        variables: { breedName: query }
+        variables: { breedName }
       });
-    }, 500);
+    }, 500),
+    []
+  );
 
-    debouncedChangeFilter();
-  }
+  useEffect(() => {
+    debouncedApiCall(input);
+
+    return () => {
+      debouncedApiCall.cancel();
+    };
+  }, [input, debouncedApiCall]);
 
   useEffect(() => {
     if (data && !loading) {
-      setShowSuggestions(true);
+      setActiveSuggestionIndex(0);
       setSuggestions(data?.getBreedsByName);
+      setShowSuggestions(true);
     }
   }, [data, loading]);
-
-  useEffect(() => {
-    if (!suggestions.length) {
-      setInput('');
-    }
-  }, [suggestions]);
 
   const keyDownHandler = (e) => {
     // enter key
     if (e.keyCode === 13) {
-      setInput(suggestions[activeSuggestionIndex].name);
+      setInput(suggestions[activeSuggestionIndex]?.name);
       setActiveSuggestionIndex(0);
       setShowSuggestions(false);
     }
@@ -69,7 +68,7 @@ const Autocomplete = () => {
     }
     // down arrow
     else if (e.keyCode === 40) {
-      if (activeSuggestionIndex - 1 === suggestions.length) {
+      if (activeSuggestionIndex === suggestions.length - 1) {
         return;
       }
 
@@ -82,17 +81,22 @@ const Autocomplete = () => {
       <InputGroup className="mb-3">
         <Input
           type="text"
-          placeholder={'Enter your breed'}
+          placeholder="Enter your breed"
           autoComplete="off"
-          onChange={(e) => changeHandler(e.target.value)}
+          onChange={(e) => setInput(e.target.value)}
           onKeyDown={keyDownHandler}
           value={input}
-          aria-label="Recipient's username"
+          aria-label="Search by Breed Name"
           aria-describedby="search"
         />
         <InputSearch id="search">
-          <Link to={`/breed/${input}`}>
-            <Search style={{ fill: colors.dark }} />
+          <Link to={input ? `/breed/${input}` : ''}>
+            <Search
+              style={{
+                fill: input ? colors.dark : colors.darkGrey,
+                cursor: input ? 'pointer' : 'not-allowed'
+              }}
+            />
           </Link>
         </InputSearch>
       </InputGroup>
@@ -103,7 +107,7 @@ const Autocomplete = () => {
               suggestions={suggestions}
             />
           )
-        : showSuggestions && <small className="ms-3">Sorry, no cat breeds found</small>}
+        : showSuggestions && !!input && <small className="ms-3">Sorry, no cat breeds found</small>}
     </>
   );
 };

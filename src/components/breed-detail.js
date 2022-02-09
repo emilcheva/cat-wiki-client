@@ -31,7 +31,16 @@ const BreedDetail = ({ breed }) => {
       <section>
         <Row>
           <Col xs="auto" className="mb-4 me-lg-5">
-            <ImageWrapper width="270" height="270" src={breedImage[0].url} alt={name} />
+            <ImageWrapper
+              width="270"
+              height="270"
+              src={
+                breedImage.length
+                  ? breedImage[0]?.url
+                  : 'https://images.unsplash.com/photo-1577349516274-37ff88a53627?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1035&q=80'
+              }
+              alt={name}
+            />
           </Col>
           <Col lg="6">
             <h2>{name}</h2>
@@ -77,14 +86,18 @@ const BreedDetail = ({ breed }) => {
         </Row>
       </section>
       <section className="my-5">
-        <h2>Other photos</h2>
-        <Row>
-          {breedImage.map((image, index) => (
-            <Col sm="6" lg="3" className="mb-4" key={index}>
-              <ImageWrapper key={image.id} src={image.url} width="100%" height="250" alt={name} />
-            </Col>
-          ))}
-        </Row>
+        {breedImage.length > 0 ? (
+          <>
+            <h2>Other photos</h2>
+            <Row>
+              {breedImage.map((image) => (
+                <Col sm="6" lg="3" className="mb-4" key={image.id}>
+                  <ImageWrapper src={image.url} width="100%" height="250" alt={name} />
+                </Col>
+              ))}
+            </Row>
+          </>
+        ) : null}
       </section>
     </>
   );
